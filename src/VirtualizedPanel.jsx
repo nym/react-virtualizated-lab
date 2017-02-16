@@ -64,12 +64,26 @@ const VirtualizedPanel = React.createClass({
   propTypes: {
     header: PropTypes.node,
     footer: PropTypes.node,
+    inView: PropTypes.bool,
+    height: PropTypes.number,
     headerTextAlign: PropTypes.oneOf(['left', 'center', 'right']),
     footerTextAlign: PropTypes.oneOf(['left', 'center', 'right'])
   },
 
+  renderPlaceholder: function() {
+    let className = classnames('re-panel', this.props.className);
+    let styles = {minHeight: this.props.height};
+    return (
+      <section className={className} style={styles}>
+        tbd
+      </section>
+    );
+  },
+
   render: function() {
     let className = classnames('re-panel', this.props.className);
+
+    if (!this.props.inView) return this.renderPlaceholder();
 
     if (this.props.header) {
       var header = (
